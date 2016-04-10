@@ -1,0 +1,14 @@
+{
+	"name": "hxnodejs-serialport",
+	"url": "https://github.com/tong/hxnodejs-serialport",
+	"license": "MIT",
+	"classPath": "src",
+	"tags": ["nodejs", "hxnodejs","serialport","serial"],
+	"description": "Type definitions for the serialport NPM module",
+	"releasenote": "Initial release",
+	"version": "1.0.0-alpha",
+	"contributors": ["tong"],
+	"dependencies": {
+		"hxnodejs": ""
+	}
+}
