@@ -1,5 +1,5 @@
 
-# Haxe serialport NPM
+# Haxe serialport NPM [![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
 
 Haxe/Nodejs type definitions for the serialport npm module.
 
