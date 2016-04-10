@@ -7,7 +7,7 @@ Haxe/Nodejs type definitions for the serialport npm module.
 * https://github.com/voodootikigod/node-serialport
 
 
-### Example
+### Usage Example
 ```haxe
 
 import js.node.Buffer;
