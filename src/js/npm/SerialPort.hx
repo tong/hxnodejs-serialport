@@ -1,7 +1,64 @@
 package js.npm;
 
+import js.Error;
 import js.node.Buffer;
 import js.node.events.EventEmitter;
+
+@:enum abstract SerialportEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
+    var open : SerialportEvent<Void->Void> = "open";
+    var data : SerialportEvent<Buffer->Void> = "data";
+	var close : SerialportEvent<Void->Void> = "close";
+	var error : SerialportEvent<Error->Void> = "error";
+	var disconnect : SerialportEvent<Void->Void> = "disconnect";
+}
+
+@:enum abstract BaudRate(Int) from Int to Int {
+	var _115200 = 115200;
+	var _57600 = 57600;
+	var _38400 = 38400;
+	var _19200 = 19200;
+	var _9600 = 9600;
+	var _4800 = 4800;
+	var _2400 = 2400;
+	var _1800 = 1800;
+	var _1200 = 1200;
+	var _600 = 600;
+	var _300 = 300;
+	var _200 = 200;
+	var _150 = 150;
+	var _134 = 134;
+	var _110 = 110;
+	var _75 = 75;
+	var _50 = 50;
+}
+
+@:enum abstract DataBits(Int) from Int to Int {
+	var _8 = 8;
+	var _7 = 7;
+	var _6 = 6;
+	var _5 = 5;
+}
+
+@:enum abstract StopBits(Int) from Int to Int {
+	var _1 = 1;
+	var _2 = 2;
+}
+
+@:enum abstract Parity(String) from String to String {
+	var none = 'none';
+	var even = 'even';
+	var mark = 'mark';
+	var odd = 'odd';
+	var space = 'space';
+}
+
+@:enum abstract FlowControl(String) from String to String {
+	var _true = 'true';
+	var xon = 'xon';
+	var xoff = 'xoff';
+	var xany = 'xany';
+	var rtscts = 'rtscts';
+}
 
 typedef SerialportInfo = {
 	comName: String,
@@ -14,22 +71,23 @@ typedef SerialportInfo = {
 }
 
 typedef SerialportOptions = {
-	?baudrate : Int,
-	?dataBits: Int,
-	?stopBits: Int,
-	?parity: Int,
-	?rtscts: Int,
+	?baudrate : BaudRate,
+	?dataBits: DataBits,
+	?stopBits: StopBits,
+	?parity: Bool,
+	?rtscts: Bool,
 	?xon: Bool,
 	?xoff: Bool,
 	?xany: Bool,
-	?flowControl: Bool,
+	?flowControl: FlowControl,
 	?bufferSize: Int,
+	?parser: EventEmitter<SerialPort>->Buffer->Void,
 	?vmin: Int, // Unix
 	?vtime: Int // Unix
 }
 
 @:jsRequire("serialport","SerialPort")
-extern class SerialPort extends EventEmitter<Dynamic> {
+extern class SerialPort extends EventEmitter<SerialPort> {
 
 	function new( port : String, ?options : SerialportOptions, ?openImmediately : Bool ) : Void;
 	function open( ?callback : Error->Void ) : Void;
