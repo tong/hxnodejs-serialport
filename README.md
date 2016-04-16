@@ -48,10 +48,3 @@ class App {
 	}
 }
 ```
-[![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
-
-
-
-[![Haxelib Version](https://img.shields.io/github/tag/tong/xspf.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/xspf.svg)
-
-
