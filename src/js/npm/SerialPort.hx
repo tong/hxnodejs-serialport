@@ -4,12 +4,12 @@ import js.Error;
 import js.node.Buffer;
 import js.node.events.EventEmitter;
 
-@:enum abstract SerialportEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
-    var open : SerialportEvent<Void->Void> = "open";
-    var data : SerialportEvent<Buffer->Void> = "data";
-	var close : SerialportEvent<Void->Void> = "close";
-	var error : SerialportEvent<Error->Void> = "error";
-	var disconnect : SerialportEvent<Void->Void> = "disconnect";
+@:enum abstract SerialPortEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
+    var open : SerialPortEvent<Void->Void> = "open";
+    var data : SerialPortEvent<Buffer->Void> = "data";
+	var close : SerialPortEvent<Void->Void> = "close";
+	var error : SerialPortEvent<Error->Void> = "error";
+	var disconnect : SerialPortEvent<Void->Void> = "disconnect";
 }
 
 @:enum abstract BaudRate(Int) from Int to Int {
@@ -60,7 +60,7 @@ import js.node.events.EventEmitter;
 	var rtscts = 'rtscts';
 }
 
-typedef SerialportInfo = {
+typedef SerialPortInfo = {
 	comName: String,
 	manufacturer: String,
 	serialNumber: String,
@@ -70,7 +70,7 @@ typedef SerialportInfo = {
 	productId: String
 }
 
-typedef SerialportOptions = {
+typedef SerialPortOptions = {
 	?baudrate : BaudRate,
 	?dataBits: DataBits,
 	?stopBits: StopBits,
@@ -89,7 +89,7 @@ typedef SerialportOptions = {
 @:jsRequire("serialport","SerialPort")
 extern class SerialPort extends EventEmitter<SerialPort> {
 
-	function new( port : String, ?options : SerialportOptions, ?openImmediately : Bool ) : Void;
+	function new( port : String, ?options : SerialPortOptions, ?openImmediately : Bool ) : Void;
 	function open( ?callback : Error->Void ) : Void;
 	function isOpen() : Bool;
 	function write( buffer : Buffer, ?callback : Error->Buffer->Void ) : Bool;
@@ -100,6 +100,6 @@ extern class SerialPort extends EventEmitter<SerialPort> {
 	function close( ?callback : Error->Void ) : Void;
 	function set( ?options : Dynamic, ?callback : Error->Dynamic->Void ) : Void;
 
-	public static inline function list( callback : Error->Array<SerialportInfo>->Void ) : Void
+	public static inline function list( callback : Error->Array<SerialPortInfo>->Void ) : Void
 		js.Lib.require( 'serialport' ).list( callback );
 }
