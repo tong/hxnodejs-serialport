@@ -6,7 +6,7 @@
 	"tags": ["nodejs", "hxnodejs","serialport","serial"],
 	"description": "Type definitions for the serialport NPM module",
 	"releasenote": "Initial release",
-	"version": "1.0.0-alpha.2",
+	"version": "1.0.0-alpha.3",
 	"contributors": ["tong"],
 	"dependencies": {
 		"hxnodejs": ""

@@ -1,10 +1,17 @@
 
-# Haxe serialport NPM [![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
+# Haxe Serialport NPM [![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
 
 Haxe/Nodejs type definitions for the serialport npm module.
 
 * https://www.npmjs.com/package/serialport
 * https://github.com/voodootikigod/node-serialport
+
+
+### Install
+```shell
+haxelib install hxnodejs-serialport
+```
+
 
 
 ### Usage Example
@@ -41,3 +48,10 @@ class App {
 	}
 }
 ```
+[![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
+
+
+
+[![Haxelib Version](https://img.shields.io/github/tag/tong/xspf.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/xspf.svg)
+
+

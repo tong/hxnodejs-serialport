@@ -10,11 +10,11 @@ class App {
 
 			if( e != null ) trace(e) else {
 
-				var device = devices[0];
-				trace( device );
+				trace( devices );
 
-				var serial = new SerialPort( device.comName, {
-					baudrate: 115200
+				var port = devices[0];
+				var serial = new SerialPort( port.comName, {
+					baudrate: _115200
 				});
 				serial.on( 'open', function(){
 					trace( 'open' );
