@@ -52,6 +52,7 @@ import js.node.events.EventEmitter;
 	var space = 'space';
 }
 
+/*
 @:enum abstract FlowControl(String) from String to String {
 	var _true = 'true';
 	var xon = 'xon';
@@ -59,6 +60,7 @@ import js.node.events.EventEmitter;
 	var xany = 'xany';
 	var rtscts = 'rtscts';
 }
+*/
 
 typedef SerialPortInfo = {
 	comName: String,
@@ -71,6 +73,8 @@ typedef SerialPortInfo = {
 }
 
 typedef SerialPortOptions = {
+    ?autoOpen: Bool,
+    ?lock: Bool,
 	?baudrate : BaudRate,
 	?dataBits: DataBits,
 	?stopBits: StopBits,
@@ -79,26 +83,26 @@ typedef SerialPortOptions = {
 	?xon: Bool,
 	?xoff: Bool,
 	?xany: Bool,
-	?flowControl: FlowControl,
-	?bufferSize: Int,
+    ?bufferSize: Int,
 	?parser: EventEmitter<SerialPort>->Buffer->Void,
-	?vmin: Int, // Unix
-	?vtime: Int // Unix
+	?platformOptions: Dynamic
 }
 
-@:jsRequire("serialport","SerialPort")
+@:jsRequire("serialport")
 extern class SerialPort extends EventEmitter<SerialPort> {
 
 	function new( port : String, ?options : SerialPortOptions, ?openImmediately : Bool ) : Void;
+
 	function open( ?callback : Error->Void ) : Void;
-	function isOpen() : Bool;
-	function write( buffer : Buffer, ?callback : Error->Buffer->Void ) : Bool;
-	function pause() : Void;
-	function resume() : Void;
-	function flush( ?callback : Error->Void ) : Void;
-	function drain( ?callback : Error->Void ) : Void;
-	function close( ?callback : Error->Void ) : Void;
-	function set( ?options : Dynamic, ?callback : Error->Dynamic->Void ) : Void;
+	function update( ?options : {?baudRate:BaudRate}, ?callback : Error->Void ) : Void;
+    function write( data : Buffer, ?callback : Error->Void ) : Bool;
+    function pause() : Void;
+    function resume() : Void;
+    function close( ?callback : Error->Void ) : Void;
+    function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Dynamic->Void ) : Void;
+    function flush( ?callback : Error->Void ) : Void;
+    function drain( ?callback : Error->Void ) : Void;
+	//function isOpen() : Bool;
 
 	public static inline function list( callback : Error->Array<SerialPortInfo>->Void ) : Void
 		js.Lib.require( 'serialport' ).list( callback );

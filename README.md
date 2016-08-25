@@ -1,7 +1,7 @@
 
 # Haxe Serialport NPM [![Build Status](https://travis-ci.org/tong/hxnodejs-serialport.svg?branch=master)](https://travis-ci.org/tong/hxnodejs-serialport)
 
-Haxe/Nodejs type definitions for the serialport npm module.
+Haxe/Nodejs type definitions for the serialport npm module (4.0.1 ).
 
 * https://www.npmjs.com/package/serialport
 * https://github.com/voodootikigod/node-serialport
@@ -11,7 +11,6 @@ Haxe/Nodejs type definitions for the serialport npm module.
 ```shell
 haxelib install hxnodejs-serialport
 ```
-
 
 
 ### Usage Example
@@ -28,20 +27,20 @@ class App {
 
 			if( e != null ) trace(e) else {
 
-				var device = devices[0];
-				trace( device );
+				for( device in devices ) trace( device );
 
-				var serial = new SerialPort( device.comName, {
-					baudrate: 115200
+				var port = devices[0];
+				var serial = new SerialPort( port.comName, {
+					baudrate: _115200
 				});
 				serial.on( 'open', function(){
-					trace( 'open' );
-					serial.write( new Buffer('ls\n'), function(e,r) {
-						if( e != null ) trace(e) else trace(r);
+					trace( 'Connected to: '+port.comName );
+					serial.write( new Buffer('ls\n'), function(e) {
+						if( e != null ) trace(e);
 				    });
 				});
 				serial.on( 'data', function(data){
-					trace( 'data: '+data.toString() );
+					trace( data.toString() );
 				});
 			}
 		});

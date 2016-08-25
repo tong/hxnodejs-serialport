@@ -10,20 +10,20 @@ class App {
 
 			if( e != null ) trace(e) else {
 
-				trace( devices );
+				for( device in devices ) trace( device );
 
 				var port = devices[0];
 				var serial = new SerialPort( port.comName, {
 					baudrate: _115200
 				});
 				serial.on( 'open', function(){
-					trace( 'open' );
-					serial.write( new Buffer('ls\n'), function(e,r) {
-						if( e != null ) trace(e) else trace(r);
+					trace( 'Connected to: '+port.comName );
+					serial.write( new Buffer('ls\n'), function(e) {
+						if( e != null ) trace(e);
 				    });
 				});
 				serial.on( 'data', function(data){
-					trace( 'data: '+data.toString() );
+					trace( data.toString() );
 				});
 			}
 		});

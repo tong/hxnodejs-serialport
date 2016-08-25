@@ -3,3 +3,4 @@
 -lib hxnodejs
 -cp ../src/
 -debug
+-dce full
