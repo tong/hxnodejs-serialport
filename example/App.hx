@@ -16,13 +16,13 @@ class App {
 				var serial = new SerialPort( port.comName, {
 					baudrate: _115200
 				});
-				serial.on( 'open', function(){
+				serial.on( open, function(){
 					trace( 'Connected to: '+port.comName );
 					serial.write( new Buffer('ls\n'), function(e) {
 						if( e != null ) trace(e);
 				    });
 				});
-				serial.on( 'data', function(data){
+				serial.on( data, function(data){
 					trace( data.toString() );
 				});
 			}
