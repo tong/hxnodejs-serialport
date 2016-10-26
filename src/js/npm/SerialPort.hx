@@ -91,18 +91,18 @@ typedef SerialPortOptions = {
 @:jsRequire("serialport")
 extern class SerialPort extends EventEmitter<SerialPort> {
 
-	function new( port : String, ?options : SerialPortOptions, ?openImmediately : Bool ) : Void;
+	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
 
 	function open( ?callback : Error->Void ) : Void;
-	function update( ?options : {?baudRate:BaudRate}, ?callback : Error->Void ) : Void;
+	function isOpen() : Bool;
     function write( data : Buffer, ?callback : Error->Void ) : Bool;
     function pause() : Void;
     function resume() : Void;
-    function close( ?callback : Error->Void ) : Void;
-    function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Dynamic->Void ) : Void;
     function flush( ?callback : Error->Void ) : Void;
     function drain( ?callback : Error->Void ) : Void;
-	//function isOpen() : Bool;
+    function close( ?callback : Error->Void ) : Void;
+    function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Void ) : Void;
+	function update( ?options : {?baudRate:BaudRate}, ?callback : Error->Void ) : Void;
 
 	public static inline function list( callback : Error->Array<SerialPortInfo>->Void ) : Void
 		js.Lib.require( 'serialport' ).list( callback );
