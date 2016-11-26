@@ -1,7 +1,7 @@
 
 # Haxe Serialport NPM
 
-Haxe/Nodejs type definitions for the serialport npm module (4.0.3).
+Haxe/Nodejs type definitions for the serialport npm module (4.0.6).
 
 * https://www.npmjs.com/package/serialport
 * https://github.com/voodootikigod/node-serialport
