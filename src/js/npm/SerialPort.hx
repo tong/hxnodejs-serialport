@@ -95,7 +95,7 @@ extern class SerialPort extends EventEmitter<SerialPort> {
 
 	function open( ?callback : Error->Void ) : Void;
 	function isOpen() : Bool;
-    function write( data : Buffer, ?callback : Error->Void ) : Bool;
+    function write( buffer : Buffer, ?callback : Error->Void ) : Bool;
     function pause() : Void;
     function resume() : Void;
     function flush( ?callback : Error->Void ) : Void;
