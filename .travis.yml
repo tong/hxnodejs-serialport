@@ -7,7 +7,13 @@ haxe:
   - "3.4.0-rc.1"
   - development
 
-script:
+matrix:
+  allow_failures:
+    - haxe: development
+
+install:
   - haxelib install hxnodejs
   - haxelib dev hxnodejs-serialport .
+
+script:
   - haxe --cwd example/ build.hxml
