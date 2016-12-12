@@ -3,9 +3,10 @@ language: haxe
 sudo: false
 
 haxe:
-  - "3.2.0"
+  - "3.2.1"
   - development
 
 script:
   - haxelib install hxnodejs
+  - haxelib dev hxnodejs-serialport .
   - haxe --cwd example/ build.hxml
