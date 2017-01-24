@@ -75,12 +75,12 @@ import js.node.events.EventEmitter;
 
 typedef SerialPortInfo = {
 	comName: String,
-	manufacturer: String,
-	serialNumber: String,
-	pnpId: String,
-	locationId: String,
-	vendorId: String,
-	productId: String
+	?manufacturer: String,
+	?serialNumber: String,
+	?pnpId: String,
+	?locationId: String,
+	?vendorId: String,
+	?productId: String
 }
 
 typedef SerialPortOptions = {
