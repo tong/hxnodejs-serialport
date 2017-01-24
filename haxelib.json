@@ -1,6 +1,6 @@
 {
 	"name": "hxnodejs-serialport",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"url": "https://github.com/tong/hxnodejs-serialport",
 	"description": "Externs for the serialport NPM module",
 	"releasenote": "See CHANGELOG",
