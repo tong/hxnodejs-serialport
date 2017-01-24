@@ -5,10 +5,31 @@ import js.node.Buffer;
 import js.node.events.EventEmitter;
 
 @:enum abstract SerialPortEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
+
+    /**
+        Callback is called with no arguments when the port is opened and ready for writing.
+    */
     var open : SerialPortEvent<Void->Void> = "open";
+
+    /**
+        Callback is called with data depending on your chosen parser.
+    */
     var data : SerialPortEvent<Buffer->Void> = "data";
-	var close : SerialPortEvent<Void->Void> = "close";
+
+    /**
+        Callback is called with no arguments when the port is closed.
+    */
+    var close : SerialPortEvent<Void->Void> = "close";
+
+    /**
+        Callback is called with an error object whenever there is an error.
+    */
 	var error : SerialPortEvent<Error->Void> = "error";
+
+    /**
+        Callback is called with an error object.
+        This will always happen before a close event if a disconnection is detected.
+    */
 	var disconnect : SerialPortEvent<Void->Void> = "disconnect";
 }
 
@@ -52,16 +73,6 @@ import js.node.events.EventEmitter;
 	var space = 'space';
 }
 
-/*
-@:enum abstract FlowControl(String) from String to String {
-	var _true = 'true';
-	var xon = 'xon';
-	var xoff = 'xoff';
-	var xany = 'xany';
-	var rtscts = 'rtscts';
-}
-*/
-
 typedef SerialPortInfo = {
 	comName: String,
 	manufacturer: String,
@@ -93,17 +104,59 @@ extern class SerialPort extends EventEmitter<SerialPort> {
 
 	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
 
+    /**
+        Opens a connection to the given serial port.
+    */
 	function open( ?callback : Error->Void ) : Void;
+
+    /**
+        Returns true if the port is open.
+    */
 	function isOpen() : Bool;
+
+    /**
+        Writes data to the given serial port.
+    */
     function write( buffer : Buffer, ?callback : Error->Void ) : Bool;
+
+    /**
+        Pauses an open connection.
+    */
     function pause() : Void;
+
+    /**
+        Resumes a paused connection.
+    */
     function resume() : Void;
+
+    /**
+        Flushes data received but not read.
+    */
     function flush( ?callback : Error->Void ) : Void;
+
+    /**
+        Waits until all output data has been transmitted to the serial port.
+    */
     function drain( ?callback : Error->Void ) : Void;
+
+    /**
+        Closes an open connection.
+    */
     function close( ?callback : Error->Void ) : Void;
+
+    /**
+        Sets flags on an open port.
+    */
     function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Void ) : Void;
+
+    /**
+        Changes the baudrate for an open port.
+    */
 	function update( ?options : {?baudRate:BaudRate}, ?callback : Error->Void ) : Void;
 
+    /**
+        Retrieves a list of available serial ports with metadata.
+    */
 	public static inline function list( callback : Error->Array<SerialPortInfo>->Void ) : Void
 		js.Lib.require( 'serialport' ).list( callback );
 }
