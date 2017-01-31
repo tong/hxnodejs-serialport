@@ -33,6 +33,9 @@ import js.node.events.EventEmitter;
 	var disconnect : SerialPortEvent<Void->Void> = "disconnect";
 }
 
+/**
+    Rate at which information is transferred  (bits per second).
+*/
 @:enum abstract BaudRate(Int) from Int to Int {
 	var _115200 = 115200;
 	var _57600 = 57600;
@@ -53,6 +56,9 @@ import js.node.events.EventEmitter;
 	var _50 = 50;
 }
 
+/**
+    Number of data bits to transmit.
+*/
 @:enum abstract DataBits(Int) from Int to Int {
 	var _8 = 8;
 	var _7 = 7;
@@ -60,11 +66,17 @@ import js.node.events.EventEmitter;
 	var _5 = 5;
 }
 
+/**
+    Number of bits used to indicate the end of a byte.
+*/
 @:enum abstract StopBits(Int) from Int to Int {
 	var _1 = 1;
 	var _2 = 2;
 }
 
+/**
+    Type of parity checking.
+*/
 @:enum abstract Parity(String) from String to String {
 	var none = 'none';
 	var even = 'even';
