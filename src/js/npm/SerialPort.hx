@@ -1,5 +1,6 @@
 package js.npm;
 
+import haxe.extern.EitherType;
 import js.Error;
 import js.node.Buffer;
 import js.node.events.EventEmitter;
@@ -97,15 +98,17 @@ typedef SerialPortInfo = {
 
 typedef SerialPortOptions = {
     ?autoOpen: Bool,
+    ?baudrate : BaudRate,
+    ?dataBits: DataBits,
+    ?highWaterMark: Int,
     ?lock: Bool,
-	?baudrate : BaudRate,
-	?dataBits: DataBits,
 	?stopBits: StopBits,
 	?parity: Bool,
 	?rtscts: Bool,
 	?xon: Bool,
 	?xoff: Bool,
 	?xany: Bool,
+    ?bindingOptions : Dynamic,
     ?bufferSize: Int,
 	?parser: EventEmitter<SerialPort>->Buffer->Void,
 	?platformOptions: Dynamic
@@ -113,6 +116,11 @@ typedef SerialPortOptions = {
 
 @:jsRequire("serialport")
 extern class SerialPort extends EventEmitter<SerialPort> {
+
+    var baudRate(default,never) : BaudRate;
+    var binding(default,never) : Dynamic;
+    var isOpen(default,never) : Bool;
+    var path(default,never) : String;
 
 	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
 
@@ -129,7 +137,11 @@ extern class SerialPort extends EventEmitter<SerialPort> {
     /**
         Writes data to the given serial port.
     */
-    function write( buffer : Buffer, ?callback : Error->Void ) : Bool;
+    function write( buffer : Buffer, ?encoding : String, ?callback : Error->Void ) : Bool;
+
+    /**
+    */
+    function read( ?size : Int ) : EitherType<String,Buffer>;
 
     /**
         Pauses an open connection.
@@ -160,6 +172,11 @@ extern class SerialPort extends EventEmitter<SerialPort> {
         Sets flags on an open port.
     */
     function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Void ) : Void;
+
+    /**
+        Returns the control flags (CTS, DSR, DCD) on the open port.
+    */
+    function get( ?callback : {error:Error,status:{?cts:Bool,?dsr:Bool,?dcd:Bool}}->Void ) : Void;
 
     /**
         Changes the baudrate for an open port.
