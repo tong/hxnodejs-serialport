@@ -130,11 +130,6 @@ extern class SerialPort extends EventEmitter<SerialPort> {
 	function open( ?callback : Error->Void ) : Void;
 
     /**
-        Returns true if the port is open.
-    */
-	function isOpen() : Bool;
-
-    /**
         Writes data to the given serial port.
     */
     function write( buffer : Buffer, ?encoding : String, ?callback : Error->Void ) : Bool;
