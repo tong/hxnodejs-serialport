@@ -98,7 +98,7 @@ typedef SerialPortInfo = {
 
 typedef SerialPortOptions = {
     ?autoOpen: Bool,
-    ?baudrate : BaudRate,
+    ?baudRate : BaudRate,
     ?dataBits: DataBits,
     ?highWaterMark: Int,
     ?lock: Bool,
