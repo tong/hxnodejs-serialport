@@ -24,7 +24,7 @@ class App {
 
 				var port = devices[0];
 				var serial = new SerialPort( port.comName, {
-					baudrate: _115200
+					baudRate: _115200
 				});
 				serial.on( open, function(){
 					trace( 'Connected to: '+port.comName );
