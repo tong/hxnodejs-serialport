@@ -114,6 +114,7 @@ typedef SerialPortOptions = {
 	?platformOptions: Dynamic
 }
 
+@:require(hxnodejs)
 @:jsRequire("serialport")
 extern class SerialPort extends EventEmitter<SerialPort> {
 
