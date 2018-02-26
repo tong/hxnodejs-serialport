@@ -37,7 +37,7 @@ import js.node.events.EventEmitter;
 /**
     Rate at which information is transferred  (bits per second).
 */
-@:enum abstract BaudRate(Int) from Int to Int {
+@:enum abstract BaudRate(Int) to Int {
 	var _115200 = 115200;
 	var _57600 = 57600;
 	var _38400 = 38400;
@@ -78,7 +78,7 @@ import js.node.events.EventEmitter;
 /**
     Type of parity checking.
 */
-@:enum abstract Parity(String) from String to String {
+@:enum abstract Parity(String) to String {
 	var none = 'none';
 	var even = 'even';
 	var mark = 'mark';
