@@ -3,7 +3,7 @@ language: haxe
 sudo: false
 
 haxe:
-  - "3.4.4"
+  - "3.4.7"
   - development
 
 matrix:
