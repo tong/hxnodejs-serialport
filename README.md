@@ -4,39 +4,9 @@
 
 Haxe/Nodejs type definitions for the [serialport npm module](https://github.com/EmergingTechnologyAdvisors/node-serialport).
 
+Node-Serialport provides a stream interface for the low-level serial port code necessary to control Arduino chipsets, X10 interfaces, Zigbee radios, highway signs, lcd screens, cash drawers, motor controllers, sensor packages, fork lifts, modems, drones, CNC machines, plotters, vending machines, ccTalk coin accecptors, SMS Gateways, RFID scanners and much more. If you have a hardware device with a UART we can speak to it. The physical world is your oyster with this goodie.
 
-### Example Usage
 
-```haxe
-
-import js.node.Buffer;
-import js.npm.SerialPort;
-
-class App {
-
-	static function main() {
-
-		SerialPort.list(function(e,devices) {
-
-			if( e != null ) trace(e) else {
-
-				for( device in devices ) trace( device );
-
-				var port = devices[0];
-				var serial = new SerialPort( port.comName, {
-					baudRate: _115200
-				});
-				serial.on( open, function(){
-					trace( 'Connected to: '+port.comName );
-					serial.write( new Buffer('ls\n'), function(e) {
-						if( e != null ) trace(e);
-				    });
-				});
-				serial.on( data, function(data){
-					trace( data.toString() );
-				});
-			}
-		});
-	}
-}
-```
+### Usage
+ - [Example application](https://github.com/tong/hxnodejs-serialport/tree/master/example)
+ - [Serialport documentation](https://node-serialport.github.io/node-serialport/)
