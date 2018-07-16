@@ -1,0 +1,11 @@
+{
+    "name": "hxnodejs-serialport-example",
+    "version": "1.0.0",
+    "description": "Serialport example usage",
+    "license": "MIT",
+    "repository": "https://github.com/tong/hxnodejs-serialport.git",
+    "main": "app.js",
+    "dependencies": {
+        "serialport": "^6.2.1"
+    }
+}
