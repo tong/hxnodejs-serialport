@@ -1,5 +1,7 @@
 *node_modules*
-/example/*.js*
-/node_modules
-/release.zip
-/release.sh
+package-lock.json
+example/*.js
+example/*.js.map
+node_modules
+release.zip
+release.sh
