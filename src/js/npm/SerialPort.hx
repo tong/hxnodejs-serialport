@@ -100,40 +100,42 @@ typedef SerialPortOptions = {
     ?autoOpen: Bool,
     ?baudRate : BaudRate,
     ?dataBits: DataBits,
-    ?highWaterMark: Int,
-    ?lock: Bool,
-	?stopBits: StopBits,
+	?hupcl : Bool,
+	?lock: Bool,
 	?parity: Bool,
 	?rtscts: Bool,
-	?xon: Bool,
-	?xoff: Bool,
+	?stopBits: StopBits,
 	?xany: Bool,
-    ?bindingOptions : Dynamic,
-    ?bufferSize: Int,
-	?parser: EventEmitter<SerialPort>->Buffer->Void,
-	?platformOptions: Dynamic
+	?xoff: Bool,
+	?xon: Bool,
+    ?highWaterMark: Int,
+    //?bindingOptions : Dynamic,
+    //?bufferSize: Int,
+	//?parser: EventEmitter<SerialPort>->Buffer->Void,
+	//?platformOptions: Dynamic
 }
 
 @:require(hxnodejs)
 @:jsRequire("serialport")
 extern class SerialPort extends EventEmitter<SerialPort> {
 
-    var baudRate(default,never) : BaudRate;
     var binding(default,never) : Dynamic;
+	var path(default,never) : String;
+	var settings(default,never) : SerialPortOptions;
     var isOpen(default,never) : Bool;
-    var path(default,never) : String;
+	var baudRate(default,never) : BaudRate;
 
 	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
 
     /**
         Opens a connection to the given serial port.
     */
-	function open( ?callback : Error->Void ) : Void;
+	function open( ?openCallback : Error->Void ) : Void;
 
     /**
         Writes data to the given serial port.
     */
-    function write( buffer : Buffer, ?encoding : String, ?callback : Error->Void ) : Bool;
+    function write( data : EitherType<Buffer,String>, ?encoding : String, ?callback : Error->Void ) : Bool;
 
     /**
     */
@@ -182,6 +184,6 @@ extern class SerialPort extends EventEmitter<SerialPort> {
     /**
         Retrieves a list of available serial ports with metadata.
     */
-	public static inline function list( callback : Error->Array<SerialPortInfo>->Void ) : Void
-		js.Lib.require( 'serialport' ).list( callback );
+	static function list( ?callback : Error->Array<SerialPortInfo>->Void ) : Promise<Array<SerialPortInfo>>;
+
 }
