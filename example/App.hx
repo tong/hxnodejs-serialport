@@ -1,6 +1,6 @@
 
 import js.node.Buffer;
-import js.npm.SerialPort;
+import js.npm.serialport.SerialPort;
 
 class App {
 
