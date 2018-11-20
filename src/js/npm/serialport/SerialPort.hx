@@ -1,4 +1,4 @@
-package js.npm;
+package js.npm.serialport;
 
 import haxe.extern.EitherType;
 import js.Error;
@@ -117,7 +117,7 @@ typedef SerialPortOptions = {
 
 @:require(hxnodejs)
 @:jsRequire("serialport")
-extern class SerialPort extends EventEmitter<SerialPort> {
+extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
 
     var binding(default,never) : Dynamic;
 	var path(default,never) : String;
