@@ -1,0 +1,7 @@
+--no-output
+-js _
+-xml haxedoc.xml
+-lib hxnodejs-serialport
+--macro include('js.npm.serialport',[])
+-D doc-gen
+-dce no

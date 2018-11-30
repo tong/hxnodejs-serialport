@@ -15,4 +15,5 @@ install:
   - haxelib dev hxnodejs-serialport .
 
 script:
+  - haxe doc.hxml
   - haxe --cwd example/ build.hxml

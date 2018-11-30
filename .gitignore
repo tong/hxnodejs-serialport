@@ -5,3 +5,4 @@ example/*.js.map
 node_modules
 release.zip
 release.sh
+haxedoc.xml
