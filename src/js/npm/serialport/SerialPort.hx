@@ -119,6 +119,11 @@ typedef SerialPortOptions = {
 @:jsRequire("serialport")
 extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
 
+    /**
+        The hardware access binding.
+    **/
+    static var Binding(default,never) : Dynamic;
+
     var binding(default,never) : Dynamic;
 	var path(default,never) : String;
 	var settings(default,never) : SerialPortOptions;
