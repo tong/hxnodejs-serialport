@@ -6,6 +6,6 @@
     "repository": "https://github.com/tong/hxnodejs-serialport.git",
     "main": "app.js",
     "dependencies": {
-        "serialport": "^7.0.2"
+        "serialport": "^7.1.0"
     }
 }

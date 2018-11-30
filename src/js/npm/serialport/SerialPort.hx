@@ -28,10 +28,9 @@ import js.node.events.EventEmitter;
 	var error : SerialPortEvent<Error->Void> = "error";
 
     /**
-        Callback is called with an error object.
-        This will always happen before a close event if a disconnection is detected.
+        Emitted when it is performant to write again if a `write()` call has returned `false`.
     */
-	var disconnect : SerialPortEvent<Void->Void> = "disconnect";
+	var drain : SerialPortEvent<Void->Void> = "drain";
 }
 
 /**
@@ -70,7 +69,7 @@ import js.node.events.EventEmitter;
 /**
     Number of bits used to indicate the end of a byte.
 */
-@:enum abstract StopBits(Int) from Int to Int {
+@:enum abstract StopBits(Int) to Int {
 	var _1 = 1;
 	var _2 = 2;
 }
@@ -97,22 +96,63 @@ typedef SerialPortInfo = {
 }
 
 typedef SerialPortOptions = {
-    ?autoOpen: Bool,
+
+    /**
+        Automatically opens the port on `nextTick`.
+    **/
+    ?autoOpen : Bool,
+
+    /**
+        The baud rate of the port to be opened.
+    **/
     ?baudRate : BaudRate,
-    ?dataBits: DataBits,
-	?hupcl : Bool,
-	?lock: Bool,
-	?parity: Bool,
-	?rtscts: Bool,
-	?stopBits: StopBits,
-	?xany: Bool,
-	?xoff: Bool,
-	?xon: Bool,
-    ?highWaterMark: Int,
-    //?bindingOptions : Dynamic,
-    //?bufferSize: Int,
-	//?parser: EventEmitter<SerialPort>->Buffer->Void,
-	//?platformOptions: Dynamic
+
+    /**
+    **/
+    ?dataBits : DataBits,
+
+    /**
+        The size of the read and write buffers (defaults to 64k).
+    **/
+    ?highWaterMark : Int,
+
+    /**
+        Prevent other processes from opening the port.
+    **/
+    ?lock : Bool,
+
+    /**
+    **/
+    ?stopBits : StopBits,
+
+    /**
+    **/
+    ?parity : Parity,
+
+    /**
+        Flow control setting.
+    **/
+    ?rtscts : Bool,
+
+    /**
+        Flow control setting.
+    **/
+    ?xon : Bool,
+
+    /**
+        Flow control setting.
+    **/
+    ?xoff : Bool,
+
+    /**
+        Flow control setting.
+    **/
+    ?xany : Bool,
+
+    /**
+        Binding specific options.
+    **/
+    ?bindingOptions : Dynamic,
 }
 
 @:require(hxnodejs)
@@ -124,16 +164,32 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     **/
     static var Binding(default,never) : Dynamic;
 
+    /**
+        The port's baudRate.
+        Use `update()` to change it.
+    **/
+    var baudRate(default,never) : BaudRate;
+
+    /**
+        The Binding object backing the port.
+    **/
     var binding(default,never) : Dynamic;
-	var path(default,never) : String;
-	var settings(default,never) : SerialPortOptions;
+
+    /**
+        `true` if the port is open, `false` otherwise
+    **/
     var isOpen(default,never) : Bool;
-	var baudRate(default,never) : BaudRate;
+
+    /**
+        The path of the serial port.
+    **/
+	var path(default,never) : String;
 
 	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
 
     /**
         Opens a connection to the given serial port.
+        Emits an `open` event when the port is open.
     */
 	function open( ?openCallback : Error->Void ) : Void;
 
@@ -149,17 +205,17 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     override function read( ?size : Int ) : EitherType<String,Buffer>;
 
     /**
-        Pauses an open connection.
+        Causes a stream in flowing mode to stop emitting `data` events, switching out of flowing mode.
     */
     override function pause() : Void;
 
     /**
-        Resumes a paused connection.
+        Causes an explicitly paused, Readable stream to resume emitting `data` events, switching the stream into flowing mode.
     */
     override function resume() : Void;
 
     /**
-        Flushes data received but not read.
+        Discards data received but not read, and written but not transmitted by the operating system.
     */
     function flush( ?callback : Error->Void ) : Void;
 
@@ -176,12 +232,28 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     /**
         Sets flags on an open port.
     */
-    function set( ?options : {?brk:Bool,?cts:Bool,?dsr:Bool,?dtr:Bool,?rts:Bool}, ?callback : Error->Void ) : Void;
+    function set(
+        ?options : {
+            ?brk : Bool,
+            ?cts : Bool,
+            ?dsr : Bool,
+            ?dtr : Bool,
+            ?rts : Bool
+        },
+        ?callback : Error->Void ) : Void;
 
     /**
         Returns the control flags (CTS, DSR, DCD) on the open port.
     */
-    function get( ?callback : {error:Error,status:{?cts:Bool,?dsr:Bool,?dcd:Bool}}->Void ) : Void;
+    function get(
+        ?callback : {
+            error:Error,
+            status : {
+                ?cts : Bool,
+                ?dsr : Bool,
+                ?dcd : Bool
+            }
+        }->Void ) : Void;
 
     /**
         Changes the baudrate for an open port.
@@ -190,6 +262,9 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
 
     /**
         Retrieves a list of available serial ports with metadata.
+        Only the comName is guaranteed.
+        If unavailable the other fields will be undefined.
+        The `comName` is either the path or an identifier (eg `COM1`) used to open the SerialPort.
     */
 	static function list( ?callback : Error->Array<SerialPortInfo>->Void ) : Promise<Array<SerialPortInfo>>;
 
