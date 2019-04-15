@@ -8,5 +8,5 @@ Node-Serialport provides a stream interface for the low-level serial port code n
 
 
 ### Usage
+ - [Serialport documentation](https://serialport.io/docs/en/guide-about)
  - [Example application](https://github.com/tong/hxnodejs-serialport/blob/master/example/App.hx)
- - [Serialport documentation](https://serialport.io/docs/api-overview)
