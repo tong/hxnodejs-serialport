@@ -1,7 +1,7 @@
 package js.npm.serialport;
 
 import haxe.extern.EitherType;
-#if (haxe<4)
+#if (haxe_ver < 4)
 import js.Error;
 import js.Promise;
 #else
