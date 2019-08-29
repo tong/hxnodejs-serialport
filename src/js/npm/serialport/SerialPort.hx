@@ -202,9 +202,9 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     /**
         Writes data to the given serial port.
     */
-    @:overload(function( ?callback : Error->Void ) : Void {})
-	@:overload(function( data : Buffer, ?callback : Error->Void ) : Void {})
-    override function write( data : String, encoding : String, ?callback : Error->Void ) : Bool;
+    @:overload(function( ?callback : EitherType<Error,Void>->Void ) : Void {})
+	@:overload(function( data : Buffer, ?callback : EitherType<Error,Void>->Void ) : Void {})
+    override function write( data : String, encoding : String, ?callback : EitherType<Error,Void>->Void ) : Bool;
 
     /**
     */
