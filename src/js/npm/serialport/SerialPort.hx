@@ -1,7 +1,13 @@
 package js.npm.serialport;
 
 import haxe.extern.EitherType;
+#if (haxe<4)
 import js.Error;
+import js.Promise;
+#else
+import js.lib.Error;
+import js.lib.Promise;
+#end
 import js.node.Buffer;
 import js.node.events.EventEmitter;
 
