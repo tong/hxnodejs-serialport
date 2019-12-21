@@ -92,7 +92,7 @@ import js.node.events.EventEmitter;
 }
 
 typedef SerialPortInfo = {
-	comName: String,
+	path: String,
 	?manufacturer: String,
 	?serialNumber: String,
 	?pnpId: String,
@@ -191,7 +191,7 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     **/
 	var path(default,never) : String;
 
-	function new( path : String, ?options : SerialPortOptions, ?openCallback : Error->Void ) : Void;
+	function new( path : String, ?options : SerialPortOptions, ?openCallback : ?Error->Void ) : Void;
 
     /**
         Opens a connection to the given serial port.
@@ -271,6 +271,6 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
         If unavailable the other fields will be undefined.
         The `comName` is either the path or an identifier (eg `COM1`) used to open the SerialPort.
     */
-	static function list( ?callback : Error->Array<SerialPortInfo>->Void ) : Promise<Array<SerialPortInfo>>;
+	static function list() : Promise<Array<SerialPortInfo>>;
 
 }
