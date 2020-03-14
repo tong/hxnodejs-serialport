@@ -43,23 +43,23 @@ import js.node.events.EventEmitter;
     Rate at which information is transferred  (bits per second).
 */
 @:enum abstract BaudRate(Int) to Int {
-	var _115200 = 115200;
-	var _57600 = 57600;
-	var _38400 = 38400;
-	var _19200 = 19200;
-	var _9600 = 9600;
-	var _4800 = 4800;
-	var _2400 = 2400;
-	var _1800 = 1800;
-	var _1200 = 1200;
-	var _600 = 600;
-	var _300 = 300;
-	var _200 = 200;
-	var _150 = 150;
-	var _134 = 134;
-	var _110 = 110;
-	var _75 = 75;
-	var _50 = 50;
+	var B115200 = 115200;
+	var B57600 = 57600;
+	var B38400 = 38400;
+	var B19200 = 19200;
+	var B9600 = 9600;
+	var B4800 = 4800;
+	var B2400 = 2400;
+	var B1800 = 1800;
+	var B1200 = 1200;
+	var B600 = 600;
+	var B300 = 300;
+	var B200 = 200;
+	var B150 = 150;
+	var B134 = 134;
+	var B110 = 110;
+	var B75 = 75;
+	var B50 = 50;
 }
 
 /**

@@ -12,7 +12,7 @@ class App {
 			for( i in 0...ports.length ) Sys.println( '$i = ${ports[i]}' );
 
 			var port = new SerialPort( ports[0].path, {
-				baudRate: _115200
+				baudRate: B115200
 			});
 			port.on( SerialPortEvent.open, function(){
 				Sys.println( 'Connected to [${ports[0].path}]' );
