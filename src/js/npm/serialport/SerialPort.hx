@@ -66,10 +66,10 @@ import js.node.events.EventEmitter;
     Number of data bits to transmit.
 */
 @:enum abstract DataBits(Int) from Int to Int {
-	var _8 = 8;
-	var _7 = 7;
-	var _6 = 6;
-	var _5 = 5;
+	var CS8 = 8;
+	var CS7 = 7;
+	var CS6 = 6;
+	var CS5 = 5;
 }
 
 /**
