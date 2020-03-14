@@ -3,7 +3,6 @@ language: haxe
 sudo: false
 
 haxe:
-  - "3.4.7"
   - "4.0.5"
   - development
 
