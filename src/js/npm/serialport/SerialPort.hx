@@ -75,9 +75,10 @@ import js.node.events.EventEmitter;
 /**
     Number of bits used to indicate the end of a byte.
 */
-@:enum abstract StopBits(Int) to Int {
-	var _1 = 1;
-	var _2 = 2;
+@:enum abstract StopBits(Float) to Float {
+    var ONE = 1;
+    var ONE_FIVE = 1.5;
+	var TWO = 2;
 }
 
 /**
