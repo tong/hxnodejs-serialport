@@ -19,9 +19,9 @@ jobs:
           haxe --version
           haxelib dev hxnodejs-serialport .
           haxelib install hxnodejs
-      - name: Build haxedocs
+      - name: Build haxedoc.xml
         run: |
           haxe doc.hxml
-      - name: Build example application
+      - name: Build example
         run: |
           haxe --cwd example build.hxml
