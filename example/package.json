@@ -4,8 +4,11 @@
     "description": "Serialport example usage",
     "license": "MIT",
     "repository": "https://github.com/tong/hxnodejs-serialport.git",
-    "main": "app.js",
+    "scripts": {
+        "build": "haxe build.hxml",
+        "start": "node app.js"
+    },
     "dependencies": {
-        "serialport": "^9.0.4"
+        "serialport": "^9.1.0"
     }
 }
