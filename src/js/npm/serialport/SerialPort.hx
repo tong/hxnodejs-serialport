@@ -1,17 +1,12 @@
 package js.npm.serialport;
 
 import haxe.extern.EitherType;
-#if (haxe_ver < 4)
-import js.Error;
-import js.Promise;
-#else
 import js.lib.Error;
 import js.lib.Promise;
-#end
 import js.node.Buffer;
 import js.node.events.EventEmitter;
 
-@:enum abstract SerialPortEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
+enum abstract SerialPortEvent<T:haxe.Constraints.Function>(Event<T>) to Event<T> {
 
     /**
         Callback is called with no arguments when the port is opened and ready for writing.
@@ -42,7 +37,7 @@ import js.node.events.EventEmitter;
 /**
     Rate at which information is transferred  (bits per second).
 */
-@:enum abstract BaudRate(Int) to Int {
+enum abstract BaudRate(Int) to Int {
 	var B115200 = 115200;
 	var B57600 = 57600;
 	var B38400 = 38400;
@@ -65,7 +60,7 @@ import js.node.events.EventEmitter;
 /**
     Number of data bits to transmit.
 */
-@:enum abstract DataBits(Int) from Int to Int {
+enum abstract DataBits(Int) from Int to Int {
 	var CS8 = 8;
 	var CS7 = 7;
 	var CS6 = 6;
@@ -75,7 +70,7 @@ import js.node.events.EventEmitter;
 /**
     Number of bits used to indicate the end of a byte.
 */
-@:enum abstract StopBits(Float) to Float {
+enum abstract StopBits(Float) to Float {
     var ONE = 1;
     var ONE_FIVE = 1.5;
 	var TWO = 2;
@@ -84,7 +79,7 @@ import js.node.events.EventEmitter;
 /**
     Type of parity checking.
 */
-@:enum abstract Parity(String) to String {
+enum abstract Parity(String) to String {
 	var none = 'none';
 	var even = 'even';
 	var mark = 'mark';
@@ -103,6 +98,8 @@ typedef SerialPortInfo = {
 }
 
 typedef SerialPortOptions = {
+
+    path: String,
 
     /**
         Automatically opens the port on `nextTick`.
@@ -163,7 +160,7 @@ typedef SerialPortOptions = {
 }
 
 @:require(hxnodejs)
-@:jsRequire("serialport")
+@:jsRequire("serialport","SerialPort")
 extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
 
     /**
@@ -192,7 +189,7 @@ extern class SerialPort extends js.node.stream.Duplex<SerialPort> {
     **/
 	var path(default,never) : String;
 
-	function new( path : String, ?options : SerialPortOptions, ?openCallback : ?Error->Void ) : Void;
+	function new(options : SerialPortOptions, ?openCallback : ?Error->Void) : Void;
 
     /**
         Opens a connection to the given serial port.
