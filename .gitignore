@@ -2,6 +2,6 @@
 example/*.js
 example/*.js.map
 node_modules
-release.zip
+hxnodejs-serialport.zip
 release.sh
 haxedoc.xml
