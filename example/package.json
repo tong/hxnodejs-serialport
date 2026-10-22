@@ -9,6 +9,6 @@
         "start": "node app.js"
     },
     "dependencies": {
-        "serialport": "10.5.0"
+        "serialport": "^13.0.0"
     }
 }

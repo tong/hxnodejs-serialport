@@ -5,7 +5,12 @@ package js.npm.serialport.parser;
 
 	@see https://en.wikipedia.org/wiki/CcTalk
 **/
-@:jsRequire("@serialport/parser-cctalk")
+@:jsRequire("serialport", "CCTalkParser")
 extern class CCTalkParser extends js.node.stream.Transform<CCTalkParser> {
-	function new() : Void;
+	var maxDelayBetweenBytesMs:Int;
+
+	/**
+		@param maxDelayBetweenBytesMs Defaults to `50`.
+	**/
+	function new(?maxDelayBetweenBytesMs:Int):Void;
 }
